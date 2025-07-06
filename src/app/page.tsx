@@ -1,11 +1,16 @@
-import { prisma } from "@/lib/db";
+"use client"; 
 
-const Page = async () => {
-  const users = await prisma.user.findMany();
+import { useTRPC } from "@/trpc/client";
+import { tr } from "date-fns/locale";
 
+const Page = () => {
+  const trpc = useTRPC();
+  trpc.createAI.queryOptions({ text: "Hello!" });
+
+  // localhost:3000/api/trpc/createAI?input={"text":"Hello!"}
   return (
     <div>
-      {JSON.stringify(users, null, 2)}
+      Hello World
     </div>
   );
 }
