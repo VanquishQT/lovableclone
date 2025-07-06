@@ -1,18 +1,18 @@
-"use client"; 
+"use client";
 
-import { useTRPC } from "@/trpc/client";
-import { tr } from "date-fns/locale";
+import { trpc } from "@/trpc/react";
+import { Button } from "@/components/ui/button";
 
 const Page = () => {
-  const trpc = useTRPC();
-  trpc.createAI.queryOptions({ text: "Hello!" });
+  const invoke = trpc.invoke.useMutation();
 
-  // localhost:3000/api/trpc/createAI?input={"text":"Hello!"}
   return (
-    <div>
-      Hello World
+    <div className="p-4 max-w-7xl mx-auto">
+      <Button onClick={() => invoke.mutate({ text: "John" })}>
+        Invoke Background Job
+      </Button>
     </div>
   );
-}
+};
 
 export default Page;
